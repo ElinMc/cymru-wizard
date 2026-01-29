@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bantani Cymru — Curriculum Planning Wizard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏴</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- HEADER -->
+  <!-- ============================================================ -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <img src="logo.jpg" alt="Bantani Cymru" class="logo">
+        <div class="header-text">
+          <h1>Curriculum Planning Wizard</h1>
+          <p class="tagline">Curriculum for Wales 2022 · Interactive Card Deck</p>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-view="wizard" onclick="switchView('wizard')">
+          <span class="nav-icon">✨</span> Wizard
+        </button>
+        <button class="nav-btn" data-view="explore" onclick="switchView('explore')">
+          <span class="nav-icon">🃏</span> Explore Cards
+        </button>
+        <a href="rubric.html" class="nav-btn">
+          <span class="nav-icon">📊</span> Rubric Creator
+        </a>
+        <button class="nav-btn" data-view="print" onclick="window.open('print-cards.html','_blank')">
+          <span class="nav-icon">🖨️</span> Print Deck
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- MAIN CONTENT -->
+  <!-- ============================================================ -->
+  <main class="app-main">
+
+    <!-- WIZARD VIEW -->
+    <div id="view-wizard" class="view active">
+      
+      <!-- Progress Bar -->
+      <div class="wizard-progress">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-steps" id="progressSteps"></div>
+      </div>
+
+      <!-- Step Container -->
+      <div class="wizard-step-container" id="wizardStepContainer">
+        <!-- Steps are rendered dynamically -->
+      </div>
+
+      <!-- Navigation -->
+      <div class="wizard-nav">
+        <button class="btn btn-secondary" id="btnPrev" onclick="wizardPrev()" disabled>
+          ← Previous
+        </button>
+        <span class="step-indicator" id="stepIndicator"></span>
+        <button class="btn btn-primary" id="btnNext" onclick="wizardNext()">
+          Next →
+        </button>
+      </div>
+    </div>
+
+    <!-- EXPLORE VIEW -->
+    <div id="view-explore" class="view">
+      <div class="explore-controls">
+        <h2>Explore All Cards</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all" onclick="filterCards('all', this)">All</button>
+          <button class="filter-btn" data-filter="purposes" onclick="filterCards('purposes', this)">Four Purposes</button>
+          <button class="filter-btn" data-filter="areas" onclick="filterCards('areas', this)">Areas of Learning</button>
+          <button class="filter-btn" data-filter="cross" onclick="filterCards('cross', this)">Cross-Curricular</button>
+          <button class="filter-btn" data-filter="teaching" onclick="filterCards('teaching', this)">Teaching Methods</button>
+          <button class="filter-btn" data-filter="assessment" onclick="filterCards('assessment', this)">Assessment Methods</button>
+        </div>
+      </div>
+      <div class="card-grid" id="exploreGrid">
+        <!-- Cards rendered dynamically -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- CARD DETAIL MODAL -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- LESSON PLAN MODAL -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay" id="lessonPlanOverlay" onclick="closeLessonPlan()">
+    <div class="modal-content modal-wide" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeLessonPlan()">×</button>
+      <div id="lessonPlanBody"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- REGISTRATION MODAL -->
+  <!-- ============================================================ -->
+  <div class="register-overlay" id="registerOverlay">
+    <div class="register-modal">
+      <button class="register-close" onclick="closeRegisterModal()">×</button>
+      <h3 id="regTitle">✨ Unlock AI Features</h3>
+      <p class="register-subtitle" id="regSubtitle">Enter your details to access AI-powered activities and downloads. We'll keep you updated with new curriculum resources.</p>
+      <form id="registerForm" onsubmit="return handleRegister(event)">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="regName" required placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="regEmail" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>School / Organisation (optional)</label>
+          <input type="text" id="regSchool" placeholder="e.g. Ysgol Gymraeg…">
+        </div>
+        <div class="form-group" style="margin-bottom:0.75rem;">
+          <label class="checkbox-label" style="display:flex;align-items:flex-start;gap:0.5rem;cursor:pointer;font-weight:400;">
+            <input type="checkbox" id="regPrivacy" onchange="toggleRegisterSubmit()" style="margin-top:0.25rem;width:auto;accent-color:var(--welsh-green);">
+            <span>I agree to the <a href="https://bantani.cymru/policies/privacy-policy/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="color:var(--welsh-green);text-decoration:underline;font-weight:600;">Bantani Cymru Privacy Policy</a></span>
+          </label>
+        </div>
+        <div class="register-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeRegisterModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="regSubmitBtn" disabled style="opacity:0.4;cursor:not-allowed;">✨ Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================================ -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-dragon">🏴󠁧󠁢󠁷󠁬󠁳󠁿</div>
+      <p>Bantani Cymru Curriculum Planning Wizard</p>
+      <p class="footer-sub">Inspired by <a href="https://joint-research-centre.ec.europa.eu" target="_blank">SCAFFOLD</a> (ETF/JRC) · Adapted for Curriculum for Wales 2022</p>
+      <p class="footer-sub">© 2026 Bantani Cymru · Made with ❤️ for Welsh education</p>
+    </div>
+  </footer>
+
+  <script src="curriculum-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

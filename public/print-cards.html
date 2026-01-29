@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bantani Cymru — Print-Ready Card Deck</title>
+  <style>
+    /* ============================================================
+       PRINT-READY CARD DECK — Bantani Cymru Curriculum Cards
+       Cards sized for standard poker card (63.5mm × 88.9mm)
+       ============================================================ */
+    
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ea: #8E44AD;
+      --hw: #E74C3C;
+      --hu: #D68910;
+      --la: #2E86C1;
+      --ma: #1ABC9C;
+      --st: #2C3E50;
+      --cross: #5B2C6F;
+      --teach: #E67E22;
+      --assess: #607D8B;
+      --purpose: #1a5276;
+      --card-w: 63.5mm;
+      --card-h: 88.9mm;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: #f0f0f0;
+      color: #2C3E50;
+      padding: 20px;
+    }
+
+    .screen-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .screen-header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .screen-header p {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .screen-header button {
+      background: #1D7044;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .screen-header button:hover { background: #165a36; }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 30px 0 15px;
+      text-align: center;
+      color: #333;
+    }
+
+    .card-sheet {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* Individual card */
+    .print-card {
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 4mm;
+      padding: 4mm;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      background: white;
+      border: 0.3mm solid #ddd;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .print-card .card-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3mm;
+    }
+
+    .print-card .card-icon {
+      font-size: 7mm;
+      margin-top: 2mm;
+      margin-bottom: 1.5mm;
+      line-height: 1;
+    }
+
+    .print-card .card-category {
+      font-size: 1.8mm;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3mm;
+      margin-bottom: 1.5mm;
+      line-height: 1.2;
+    }
+
+    .print-card .card-title {
+      font-size: 3mm;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1.5mm;
+      color: #1a1a1a;
+    }
+
+    .print-card .card-body {
+      font-size: 2.1mm;
+      line-height: 1.35;
+      color: #444;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .print-card .card-footer {
+      font-size: 1.6mm;
+      color: #888;
+      margin-top: auto;
+      padding-top: 1mm;
+      border-top: 0.2mm solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 1mm;
+    }
+
+    .print-card .card-footer .dot {
+      width: 1.5mm;
+      height: 1.5mm;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .print-card .good-with {
+      font-size: 1.6mm;
+      color: #999;
+      margin-top: 1mm;
+    }
+
+    /* Color variants */
+    .print-card[data-area="ea"] .card-stripe, .print-card[data-area="ea"] .card-category { background: var(--ea); color: var(--ea); }
+    .print-card[data-area="ea"] .card-stripe { background: var(--ea); }
+    .print-card[data-area="hw"] .card-stripe { background: var(--hw); }
+    .print-card[data-area="hw"] .card-category { color: var(--hw); }
+    .print-card[data-area="hu"] .card-stripe { background: var(--hu); }
+    .print-card[data-area="hu"] .card-category { color: var(--hu); }
+    .print-card[data-area="la"] .card-stripe { background: var(--la); }
+    .print-card[data-area="la"] .card-category { color: var(--la); }
+    .print-card[data-area="ma"] .card-stripe { background: var(--ma); }
+    .print-card[data-area="ma"] .card-category { color: var(--ma); }
+    .print-card[data-area="st"] .card-stripe { background: var(--st); }
+    .print-card[data-area="st"] .card-category { color: var(--st); }
+    .print-card[data-area="cross"] .card-stripe { background: var(--cross); }
+    .print-card[data-area="cross"] .card-category { color: var(--cross); }
+    .print-card[data-area="teach"] .card-stripe { background: var(--teach); }
+    .print-card[data-area="teach"] .card-category { color: var(--teach); }
+    .print-card[data-area="assess"] .card-stripe { background: var(--assess); }
+    .print-card[data-area="assess"] .card-category { color: var(--assess); }
+    .print-card[data-area="purpose"] .card-stripe { background: var(--purpose); }
+    .print-card[data-area="purpose"] .card-category { color: var(--purpose); }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+
+      .screen-header { display: none; }
+      .section-title { font-size: 10pt; margin: 10mm 0 5mm; }
+
+      .card-sheet {
+        gap: 2mm;
+        justify-content: flex-start;
+        margin: 0;
+      }
+
+      .print-card {
+        border: 0.2mm solid #ccc;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+    }
+
+    /* Screen responsive */
+    @media screen and (max-width: 600px) {
+      .card-sheet { gap: 4px; }
+      .print-card {
+        width: calc(50% - 4px);
+        height: auto;
+        min-height: var(--card-h);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen-header">
+    <h1>🏴󠁧󠁢󠁷󠁬󠁳󠁿 Bantani Cymru — Print-Ready Card Deck</h1>
+    <p>Curriculum for Wales 2022 · All cards laid out for printing at poker card size (63.5 × 88.9mm).<br>
+    Print on card stock, cut along edges. Colour-coded by Area of Learning & Experience.</p>
+    <button onclick="window.print()">🖨️ Print Cards</button>
+  </div>
+
+  <div id="cardsContainer"></div>
+
+  <script src="curriculum-data.js"></script>
+  <script>
+    const D = CurriculumData;
+    const container = document.getElementById('cardsContainer');
+    let html = '';
+
+    // ---- Four Purposes ----
+    html += '<div class="section-title">🎯 The Four Purposes</div><div class="card-sheet">';
+    D.purposes.forEach(p => {
+      html += makeCard('purpose', 'Four Purposes', p.icon, p.title, p.subtitle, 
+        p.characteristics.slice(0, 5).map(c => '• ' + c).join('\n'));
+    });
+    html += '</div>';
+
+    // ---- Areas & Statements ----
+    const areaKeys = {
+      'expressive-arts': 'ea',
+      'health-wellbeing': 'hw',
+      'humanities': 'hu',
+      'languages': 'la',
+      'maths': 'ma',
+      'science-tech': 'st'
+    };
+
+    D.areas.forEach(area => {
+      const key = areaKeys[area.id];
+      html += `<div class="section-title">${area.icon} ${area.title}</div><div class="card-sheet">`;
+      
+      // Area overview card
+      html += makeCard(key, area.title, area.icon, area.title, 'Area of Learning & Experience',
+        area.introduction + '\n\nDisciplines: ' + area.disciplines);
+      
+      // Statement cards
+      area.statementsOfWhatMatters.forEach(s => {
+        html += makeCard(key, area.title + ' · SWM', area.icon, s.title, 'Statement of What Matters',
+          s.summary + '\n\n' + s.description.substring(0, 200) + '…');
+      });
+      
+      html += '</div>';
+    });
+
+    // ---- Cross-Curricular Skills ----
+    html += '<div class="section-title">🔗 Cross-Curricular Skills</div><div class="card-sheet">';
+    D.crossCurricularSkills.forEach(s => {
+      html += makeCard('cross', 'Cross-Curricular', s.icon, s.title, 'Mandatory Skill',
+        s.description + '\n\n' + s.elements.map(e => '• ' + e).join('\n'));
+    });
+    D.widerSkills.forEach(s => {
+      html += makeCard('cross', 'Wider Skills', s.icon, s.title, 'Integral Skill', s.description);
+    });
+    html += '</div>';
+
+    // ---- Teaching Methods ----
+    html += '<div class="section-title">🏗️ Teaching Methods</div><div class="card-sheet">';
+    D.teachingMethods.forEach(m => {
+      html += makeCard('teach', 'Teaching Method', m.icon, m.title + ' (' + m.abbrev + ')', '',
+        m.description + '\n\nSteps:\n' + m.steps.map((s, i) => `${i + 1}. ${s}`).join('\n'));
+    });
+    html += '</div>';
+
+    // ---- Assessment Methods ----
+    html += '<div class="section-title">📋 Assessment Methods</div><div class="card-sheet">';
+    D.assessmentMethods.forEach(m => {
+      html += makeCard('assess', 'Assessment Method', m.icon, m.title, '',
+        m.description + '\n\nApproach: ' + m.approach);
+    });
+    html += '</div>';
+
+    container.innerHTML = html;
+
+    function makeCard(areaKey, categoryText, icon, title, subtitle, body) {
+      // Truncate body for card size
+      const maxBody = 280;
+      const truncBody = body.length > maxBody ? body.substring(0, maxBody) + '…' : body;
+      
+      return `
+        <div class="print-card" data-area="${areaKey}">
+          <div class="card-stripe"></div>
+          <div class="card-icon">${icon}</div>
+          <div class="card-category">${categoryText}</div>
+          <div class="card-title">${title}</div>
+          ${subtitle ? `<div style="font-size:2mm;color:#666;margin-bottom:1mm;">${subtitle}</div>` : ''}
+          <div class="card-body">${truncBody.replace(/\n/g, '<br>')}</div>
+          <div class="card-footer">
+            <span class="dot" style="background:${getColor(areaKey)}"></span>
+            Bantani Cymru · Curriculum for Wales 2022
+          </div>
+        </div>
+      `;
+    }
+
+    function getColor(key) {
+      const map = { ea: '#8E44AD', hw: '#E74C3C', hu: '#D68910', la: '#2E86C1', ma: '#1ABC9C', st: '#2C3E50', cross: '#5B2C6F', teach: '#E67E22', assess: '#607D8B', purpose: '#1a5276' };
+      return map[key] || '#999';
+    }
+  </script>
+</body>
+</html>

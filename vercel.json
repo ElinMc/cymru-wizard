@@ -1,0 +1,8 @@
+{
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/rubric", "destination": "/rubric.html" },
+    { "source": "/print-cards", "destination": "/print-cards.html" }
+  ]
+}
