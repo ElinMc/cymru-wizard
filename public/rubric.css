@@ -1,0 +1,490 @@
+/* ============================================================
+   RUBRIC CREATOR — Additional Styles
+   ============================================================ */
+
+/* ---- Layout ---- */
+.rubric-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.rubric-intro {
+  margin-bottom: 2rem;
+}
+
+/* ---- Form ---- */
+.rubric-form {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rubric-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* ---- SWM Picker ---- */
+.swm-picker-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  border-style: dashed;
+}
+
+.swm-picker-btn:hover {
+  border-color: var(--welsh-green) !important;
+  color: var(--welsh-green) !important;
+}
+
+.swm-selected-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.swm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.swm-chip:hover {
+  opacity: 0.8;
+  transform: scale(0.97);
+}
+
+.swm-chip .chip-remove {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-left: 0.15rem;
+}
+
+/* ---- SWM Modal ---- */
+.swm-modal-grid {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 55vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.swm-modal-item {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.swm-modal-item:hover {
+  border-color: var(--welsh-green);
+  background: white;
+}
+
+.swm-modal-item.selected {
+  border-color: var(--welsh-green);
+  background: #f0faf4;
+  box-shadow: 0 0 0 2px rgba(29, 112, 68, 0.15);
+}
+
+.swm-modal-item .swm-check {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 4px;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+  margin-top: 2px;
+  transition: var(--transition);
+}
+
+.swm-modal-item.selected .swm-check {
+  background: var(--welsh-green);
+  border-color: var(--welsh-green);
+}
+
+.swm-modal-item .swm-info h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.swm-modal-item .swm-info .swm-area-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+  display: inline-block;
+}
+
+.swm-modal-item .swm-info p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.45;
+}
+
+.swm-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-light);
+}
+
+.swm-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.4;
+}
+
+/* ---- PDF Upload ---- */
+.pdf-upload-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pdf-filename {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.pdf-preview {
+  margin-top: 0.75rem;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.pdf-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: var(--welsh-red);
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-remove:hover {
+  text-decoration: underline;
+}
+
+.pdf-preview-text {
+  padding: 0.75rem;
+  max-height: 150px;
+  overflow-y: auto;
+  font-size: 0.8rem;
+  color: var(--text);
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+/* ---- Generate Button ---- */
+.generate-section {
+  text-align: center;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.btn-generate {
+  font-size: 1.05rem;
+  padding: 0.85rem 2.5rem;
+  background: linear-gradient(135deg, var(--welsh-green), #1ABC9C);
+  border: none;
+  color: white;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.btn-generate:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 112, 68, 0.3);
+}
+
+.btn-generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---- Rubric Output ---- */
+.rubric-output {
+  margin-top: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.rubric-result-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.rubric-result-header img {
+  height: 40px;
+  margin-bottom: 0.5rem;
+}
+
+.rubric-result-header h2 {
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.rubric-result-header .rubric-meta {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* ---- Rubric Table ---- */
+.rubric-table-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.rubric-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 700px;
+}
+
+.rubric-table thead th {
+  padding: 0.85rem 1rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.rubric-table thead th:first-child {
+  text-align: left;
+  min-width: 160px;
+}
+
+.rubric-table thead th.level-emerging {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.rubric-table thead th.level-developing {
+  background: #FFF9C4;
+  color: #F57F17;
+}
+
+.rubric-table thead th.level-securing {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.rubric-table thead th.level-excelling {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
+.rubric-table thead th.level-criteria {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.rubric-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.rubric-table tbody td:first-child {
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg);
+  border-right: 2px solid var(--border);
+}
+
+.rubric-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rubric-table tbody tr:hover td {
+  background-color: rgba(29, 112, 68, 0.02);
+}
+
+.rubric-table tbody tr:hover td:first-child {
+  background-color: rgba(29, 112, 68, 0.05);
+}
+
+.criterion-title {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.criterion-swm {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ---- Rubric Statements Reference ---- */
+.rubric-statements-ref {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.rubric-statements-ref h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.rubric-statements-ref .ref-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.rubric-statements-ref .ref-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  color: white;
+  font-weight: 500;
+}
+
+/* ---- Actions ---- */
+.rubric-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* ---- Area-colour theming for rubric ---- */
+.rubric-area-ea { --rubric-accent: #8E44AD; }
+.rubric-area-hw { --rubric-accent: #E74C3C; }
+.rubric-area-hu { --rubric-accent: #D68910; }
+.rubric-area-la { --rubric-accent: #2E86C1; }
+.rubric-area-ma { --rubric-accent: #1ABC9C; }
+.rubric-area-st { --rubric-accent: #2C3E50; }
+
+.rubric-area-ea .rubric-table thead th.level-criteria,
+.rubric-area-ea .rubric-table tbody td:first-child { border-left: 4px solid #8E44AD; }
+.rubric-area-hw .rubric-table thead th.level-criteria,
+.rubric-area-hw .rubric-table tbody td:first-child { border-left: 4px solid #E74C3C; }
+.rubric-area-hu .rubric-table thead th.level-criteria,
+.rubric-area-hu .rubric-table tbody td:first-child { border-left: 4px solid #D68910; }
+.rubric-area-la .rubric-table thead th.level-criteria,
+.rubric-area-la .rubric-table tbody td:first-child { border-left: 4px solid #2E86C1; }
+.rubric-area-ma .rubric-table thead th.level-criteria,
+.rubric-area-ma .rubric-table tbody td:first-child { border-left: 4px solid #1ABC9C; }
+.rubric-area-st .rubric-table thead th.level-criteria,
+.rubric-area-st .rubric-table tbody td:first-child { border-left: 4px solid #2C3E50; }
+
+/* ---- Error ---- */
+.rubric-error {
+  text-align: center;
+  padding: 2rem;
+  color: var(--welsh-red);
+}
+
+.rubric-error p {
+  margin-bottom: 1rem;
+}
+
+/* ---- Print styles ---- */
+@media print {
+  .app-header, .app-footer, .rubric-form, .rubric-intro,
+  .rubric-actions, .rubric-loading, .modal-overlay, .register-overlay { display: none !important; }
+
+  .rubric-output { display: block !important; margin: 0; }
+
+  .rubric-table-wrapper {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .rubric-table { font-size: 0.75rem; }
+
+  body { background: white; }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .rubric-form {
+    padding: 1.25rem;
+  }
+
+  .rubric-table-wrapper {
+    margin: 1rem -0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .btn-generate {
+    width: 100%;
+  }
+}
