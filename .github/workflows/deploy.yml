@@ -20,5 +20,4 @@ jobs:
           with:                                                                 
             context: .                                            
             push: true
-            tags:
-registry.eu-central-1.nhost.run/0f4a24b6-6af4-40ac-9b95-59df1fccb3a5:latest
+            tags: registry.eu-central-1.nhost.run/0f4a24b6-6af4-40ac-9b95-59df1fccb3a5:latest
