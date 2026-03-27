@@ -3,14 +3,24 @@
 // ============================================================
 
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
+const { Pool } = require('pg');
 
 const app = express();
-const PORT = process.env.PORT || 18801;
+const PORT = process.env.PORT || 3000;
 
 // API key from environment or fallback
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
+
+// PostgreSQL connection pool
+const pool = new Pool({
+  host: process.env.PGHOST || 'postgres-service',
+  port: parseInt(process.env.PGPORT || '5432'),
+  user: process.env.PGUSER || 'postgres',
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  ssl: false,
+});
 
 app.use(express.json({ limit: '1mb' }));
 app.use(express.static(path.join(__dirname)));
@@ -85,7 +95,7 @@ Generate 4-6 varied, engaging activity ideas that align with these selections.`;
   }
 });
 
-// ---- POST /api/register — Email Capture ----
+// ---- POST /api/register — Email Capture (saves to Postgres) ----
 app.post('/api/register', async (req, res) => {
   try {
     const { name, email, school, planType, timestamp } = req.body;
@@ -93,19 +103,23 @@ app.post('/api/register', async (req, res) => {
       return res.status(400).json({ error: 'Name and email are required' });
     }
 
-    const leadsPath = path.join(__dirname, 'leads.json');
-    let leads = [];
-    try {
-      const existing = fs.readFileSync(leadsPath, 'utf8');
-      leads = JSON.parse(existing);
-    } catch {
-      // File doesn't exist yet
-    }
+    console.log('Registering lead:', email);
 
-    leads.push({ name, email, school: school || '', planType: planType || 'pdf', timestamp: timestamp || new Date().toISOString() });
-    fs.writeFileSync(leadsPath, JSON.stringify(leads, null, 2));
+    const result = await pool.query(
+      `INSERT INTO cymru_leads (name, email, school, plan_type, created_at)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id`,
+      [
+        name,
+        email,
+        school || '',
+        planType || 'pdf',
+        timestamp || new Date().toISOString(),
+      ]
+    );
 
-    res.json({ success: true });
+    console.log('Saved lead:', result.rows[0]?.id);
+    res.json({ success: true, id: result.rows[0]?.id });
   } catch (err) {
     console.error('Register error:', err);
     res.status(500).json({ error: 'Internal server error' });

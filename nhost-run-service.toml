@@ -1,0 +1,48 @@
+name = 'cymru-wizard'
+
+[image]
+image = 'registry.eu-central-1.nhost.run/0f4a24b6-6af4-40ac-9b95-59df1fccb3a5:latest'
+
+[[environment]]
+name = 'ANTHROPIC_API_KEY'
+value = '{{ secrets.ANTHROPIC_API_KEY }}'
+
+[[environment]]
+name = 'PGHOST'
+value = 'postgres-service'
+
+[[environment]]
+name = 'PGPORT'
+value = '5432'
+
+[[environment]]
+name = 'PGUSER'
+value = 'postgres'
+
+[[environment]]
+name = 'PGPASSWORD'
+value = '{{ secrets.PGPASSWORD }}'
+
+[[environment]]
+name = 'PGDATABASE'
+value = 'cjlrphejelpejlxejmzz'
+
+[[environment]]
+name = 'NODE_ENV'
+value = 'production'
+
+[[environment]]
+name = 'PORT'
+value = '3000'
+
+[[ports]]
+port = 3000
+type = 'http'
+publish = true
+
+[resources]
+replicas = 1
+
+[resources.compute]
+cpu = 250
+memory = 512
