@@ -1,0 +1,26 @@
+name: Deploy to Nhost Run                                       
+                                                                                
+  on:
+    push:                                                                       
+      branches: [main]                                            
+
+  jobs:
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Login to Nhost Registry
+          uses: docker/login-action@v3
+          with:                                                                 
+            registry: registry.eu-central-1.nhost.run
+            username: ${{ secrets.NHOST_PAT }}                                  
+            password: ${{ secrets.NHOST_PAT }}                    
+
+        - name: Build and push                                                  
+          uses: docker/build-push-action@v5
+          with:                                                                 
+            context: .                                            
+            push: true
+            tags:
+  registry.eu-central-1.nhost.run/0f4a24b6-6af4-40ac-9b95-59df1fccb3a5:latest
